@@ -1,5 +1,4 @@
-# Dillinger
-CurrencyConverter
+# CurrencyConverter
 ## REST API для перевода валют
 
 #### Сообщить нынешний курс: POST /database?merge=1 JSON: {"USD:RUR": 78.84, "EUR:RUR": 89.92}
