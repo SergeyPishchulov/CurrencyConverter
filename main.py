@@ -3,7 +3,7 @@ from money import Money, xrates
 from decimal import Decimal
 from converter import Converter
 from aiohttp import web
-import redis  # sudo apt-get install redis-server
+import redis
 
 xrates.install('money.exchange.SimpleBackend')
 xrates.base = 'USD'
