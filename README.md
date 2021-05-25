@@ -2,7 +2,9 @@
 ## REST API для перевода валют
 
 #### Сообщить нынешний курс:
-POST /database?merge=1 JSON: {"USD:RUR": 78.84, "EUR:RUR": 89.92}
+POST /database?merge=1
+JSON: {"USD:RUR": 78.84, "EUR:RUR": 89.92}
+
 merge = 0 - перед обновлением удалить данные
 merge = 1 - объеденить данные, при конфликте заменить новыми
 
