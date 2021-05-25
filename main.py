@@ -3,11 +3,13 @@ from money import Money, xrates
 from decimal import Decimal
 from converter import Converter
 from aiohttp import web
+import redis  # sudo apt-get install redis-server
 
 xrates.install('money.exchange.SimpleBackend')
 xrates.base = 'USD'
-
-converter = Converter()
+r = redis.Redis(host='localhost', port=6379, db=0)
+r.flushall()
+converter = Converter(r)
 
 
 async def update_exchange_rate(request):
@@ -15,7 +17,9 @@ async def update_exchange_rate(request):
     merge_flag = int(params['merge'])
     new_rate = await request.json()
     converter.update_rate(new_rate, merge_flag)
-    return web.Response(text=json.dumps(converter.exchange_rate))
+    return web.Response(text=json.dumps(
+        {k.decode(): converter.exchange_rate[k].decode()
+         for k in converter.exchange_rate.keys()}))
 
 
 async def convert(request):
